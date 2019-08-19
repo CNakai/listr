@@ -5,16 +5,18 @@ CUTOFF_SET_CODE = 'HOU'
 SET_RELEASE_DATE_FILE_PATH = 'data/set_release_dates.json'
 
 
+# SRCNO = set, rarity, color, name order
+#   CNO = color, name order
 def main():
 	# Collect card sets that require 'complex' sorting
-	sets_requiring_further_sorting = get_all_sets_after(CUTOFF_SET_CODE)
+	sets_requiring_srcno = get_all_sets_after(CUTOFF_SET_CODE)
 	card_objects = get_card_objects(get_card_name_list())
-	(cs_listings, ss_listings) = generate_listings(card_objects,
-	                                               sets_requiring_further_sorting)
-	cs_listings = complex_sort(cs_listings)
-	ss_listings = simple_sort(ss_listings)
+	(listings_for_SRCNO, listings_for_CNO) = generate_listings(card_objects,
+	                                                           sets_requiring_SRCNO)
+	SRCNO_listings = SRCNO_sort(listings_for_SRCNO)
+	CNO_listings = CNO_sort(listings_for_CNO)
 
-	output_listings([cs_listings, ss_listings])
+	output_listings([SRCNO_listings, CNO_listings])
 
 
 def get_all_sets_after(cutoff_set_code):
