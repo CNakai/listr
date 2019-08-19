@@ -8,7 +8,6 @@ SET_RELEASE_DATE_FILE_PATH = 'data/set_release_dates.json'
 # SRCNO = set, rarity, color, name order
 #   CNO = color, name order
 def main():
-	# Collect card sets that require 'complex' sorting
 	sets_requiring_srcno = get_all_sets_after(CUTOFF_SET_CODE)
 	card_objects = get_card_objects(get_card_name_list())
 	(listings_for_SRCNO, listings_for_CNO) = generate_listings(card_objects,
@@ -27,10 +26,6 @@ def get_all_sets_after(cutoff_set_code):
 	        in set_code_release_date_pairs.keys()
 	        if set_code_release_date_pairs[set_code] > cutoff_date]
 
-
-	# For the first, simply order alphabetically within color (group multicolor)
-	# For the second, order alphabetically within color within rarity within set
-	# Output sorted list entries one per line
 
 
 
