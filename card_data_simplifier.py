@@ -37,7 +37,7 @@ def get_card_data(mtg_sets_json):
 			if card['name'] in cards_seen or is_skippable_card(card):
 				continue
 			cards_seen.add(card['name'])
-			simplified_cards[card['name']] = create_simplified_card(card)
+			simplified_cards[card['name'].upper()] = create_simplified_card(card)
 	return simplified_cards
 
 
