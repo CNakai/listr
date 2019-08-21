@@ -43,17 +43,14 @@ def generate_listings(card_list, sets_requiring_SRCNO):
     SRCNO_cards = []
     CNO_cards = []
     for card_name in card_list:
-        if (card_name.get("rarity") == 'rare' or
-        card_name.get("rarity") == 'mythic'):
-            SRCNO_cards.push(create_SRCNO_entry(card_name))
-        else:
-            current_card_printings = card_name.get('printings')
-            for printing in current_card_printings:
-                if printing in sets_requiring_SRCNO:
-                    SRCNO_cards.push(create_SRCNO_entry(card_name, printing))
-                else:
-                    if card_name not in CNO_cards:
-                        CNO_cards.push(create_CNO_entry(card_name))
+        current_card_printings = card_name.get('printings')
+        for printing in current_card_printings:
+            if printing in sets_requiring_SRCNO or \
+               card_name['rarity'] in ('rare', 'mythic'):
+                SRCNO_cards.push(create_SRCNO_entry(card_name, printing))
+            else:
+                if card_name not in CNO_cards:
+                CNO_cards.push(create_CNO_entry(card_name))
     return (SRCNO_cards, CNO_cards)
 
 
