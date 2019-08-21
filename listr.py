@@ -59,6 +59,7 @@ def generate_listings(card_list, sets_requiring_SRCNO):
     #so we'll have to make some changes to this
     SRCNO_cards = []
     CNO_cards = []
+    seen_CNO_card_names = set()
     for card_name in card_list:
         current_card_printings = card_name.get('printings')
         for printing in current_card_printings:
@@ -67,8 +68,9 @@ def generate_listings(card_list, sets_requiring_SRCNO):
                 SRCNO_cards.append(create_listing(card_name, printing, 'SRCNO'))
             else:
                 CNO_listing = create_listing(card_name, printing, 'CNO')
-                if CNO_listing not in CNO_cards:
+                if CNO_listing['name'] not in seen_CNO_card_names:
                     CNO_cards.append(CNO_listing)
+                    seen_CNO_card_names.add(CNO_listing['name'])
     return (SRCNO_cards, CNO_cards)
 
 
@@ -130,18 +132,6 @@ def get_card_objects(card_list):
 def get_cmd_args():
     ''' Helper function to get CLI arguments '''
     return (sys.argv[1], sys.argv[2])
-
-
-def get_all_sets_after(cutoff_set_code):
-    ''' Builds a list containing the sets that are currently in standard \n
-    cutoff_set_code : a string representing the 3 character set code as
-    defined by WOTC '''
-    with open(SET_RELEASE_DATE_FILE_PATH) as SRDF:
-        set_code_release_date_pairs = json.load(SRDF)
-    cutoff_date = set_code_release_date_pairs[CUTOFF_SET_CODE]
-    return [set_code for set_code
-        in set_code_release_date_pairs.keys()
-        if set_code_release_date_pairs[set_code] > cutoff_date]
 
 
 def output_listings(listings, output_file_path):
