@@ -48,34 +48,34 @@ def generate_listings(card_list, sets_requiring_SRCNO):
         for printing in current_card_printings:
             if card_name['rarity'] in ('rare', 'mythic') or \
                printing in sets_requiring_SRCNO:
-                SRCNO_cards.append(create_SRCNO_entry(card_name, printing))
+                SRCNO_cards.append(create_listing(card_name, printing, 'SRCNO'))
             else:
-                CNO_listing = create_CNO_entry(card_name)
+                CNO_listing = create_listing(card_name, printing, 'CNO')
                 if CNO_listing not in CNO_cards:
                     CNO_cards.append(CNO_listing)
     return (SRCNO_cards, CNO_cards)
 
 
-def create_SRCNO_entry(card_object, printing):
+def create_listing(card_object, printing, sort_type):
     ''' Puts a card object into SRCNO format '''
-    ret_list = [printing, card_object['rarity'], \
-    card_object['colors'], card_object['name']]
-    return ret_list
-
-
-def create_CNO_entry(card_object):
-    ''' Puts a card object into CNO format '''
-    ret_list = [card_object['colors'], card_object['name']]
-    return ret_list
+    listing = {
+        'set': printing,
+        'rarity':card_object['rarity'],
+        'color': card_object['colors'],
+        'name': card_object['name'],
+        'sort_type': sort_type
+    }
+    return listing
 
 
 def SRCNO_sort(listings):
-    return sorted(sorted(CNO_sort(listings), key=lambda l: l[-3]),
-                  key=lambda l: l[-4])
+    return sorted(sorted(CNO_sort(listings), key=lambda l: l['rarity']),
+                  key=lambda l: l['set'])
 
 
 def CNO_sort(listings):
-    return sorted(sorted(listings, key=lambda l: l[-1]), key=lambda l: l[-2])
+    return sorted(sorted(listings, key=lambda l: l['name']),
+                  key=lambda l: l['color'])
 
 
 # This may be bugged; gonna test it, standalone, in IDLE
@@ -128,8 +128,8 @@ def get_all_sets_after(cutoff_set_code):
         if set_code_release_date_pairs[set_code] > cutoff_date]
 
 
-def output_listings(listings, output_file_path, style='python'):
-    if style.lower().strip() == 'html':
+def output_listings(listings, output_file_path):
+    if output_file_path.split('.')[-1] == 'html':
         output_func = output_html_listings
     else:
         output_func = output_python_listings
@@ -142,7 +142,72 @@ def output_python_listings(listings, output_file_path):
 
 
 def output_html_listings(listings, output_file_path):
-    pass
+    prefix = """
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Listr</title>
+    <style>
+      span {
+        display: inline-block;
+      }
+      .set {
+        width: 3em;
+      }
+      .rarity {
+        width: 5.5em;
+      }
+      .color {
+        width: 4em;
+      }
+    </style>
+  </head>
+
+  <body>
+"""
+
+    suffix = """
+    <script type="text/javascript">
+      function setUpListeners() {
+        for (let cb of document.querySelectorAll('input')) {
+          cb.addEventListener('change', checkboxListener)
+        }
+      }
+
+      function checkboxListener() {
+        console.log(this)
+        const card_name = this.parentNode.dataset['name']
+        const set = this.parentNode.dataset['set']
+        const all_occurrences = document.querySelectorAll(`[data-name="${card_name}"]`)
+
+        for (const occurrence of all_occurrences) {
+          if (this.checked && set !== occurrence.dataset['set']) {
+            occurrence.style.display = 'none'
+          } else {
+            occurrence.style.display = 'block'
+          }
+        }
+      }
+
+      setUpListeners()
+    </script>
+  </body>
+</html>
+"""
+    with open(output_file_path, 'w', encoding='utf-8') as f:
+        f.write(prefix)
+        for listing in listings:
+            f.write(f"""
+    <div data-name="{listing['name']}" data-set="{listing['set']}">""")
+            if listing['sort_type'] == 'SRCNO':
+                f.write(f"""
+      <input type="checkbox"> | <span class="set">{listing['set']}</span> | <span class="rarity">{listing['rarity']}</span> | <span class="color">{listing['color']}</span> | <span class="name">{listing['name']}</span>""")
+            else:
+                f.write(f"""
+      <input type="checkbox"> | <span class="color">{listing['color']}</span> | <span class="name">{listing['name']}</span>""")
+            f.write("""
+    </div>""")
+        f.write(suffix)
 
 if __name__ == '__main__':
     main()
