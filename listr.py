@@ -19,19 +19,19 @@ ALL_CARDS_FILE_PATH = 'data/all_cards.json'
 
 # Figure out which sets are standard so they can be formatted in SRCNO or CNO
 def main():
-	(card_list_file_path, formatted_list_output_path) = get_cmd_args()
+        (card_list_file_path, formatted_list_output_path) = get_cmd_args()
 
-	print(f"Reading Card List from {card_list_file_path} ...")
-	requested_cards = get_card_objects(get_card_name_list())
+        print(f"Reading Card List from {card_list_file_path} ...")
+        requested_cards = get_card_objects(get_card_name_list())
         print(f"Done building card_objects")
 
-	sets_requiring_srcno = get_all_sets_after(CUTOFF_SET_CODE)
-	(listings_for_SRCNO, listings_for_CNO) = generate_listings(requested_cards,
-	                                                           sets_requiring_SRCNO)
-	SRCNO_listings = SRCNO_sort(listings_for_SRCNO)
-	CNO_listings = CNO_sort(listings_for_CNO)
+        sets_requiring_srcno = get_all_sets_after(CUTOFF_SET_CODE)
+        (listings_for_SRCNO, listings_for_CNO) = generate_listings(requested_cards,
+                                                                sets_requiring_SRCNO)
+        SRCNO_listings = SRCNO_sort(listings_for_SRCNO)
+        CNO_listings = CNO_sort(listings_for_CNO)
 
-	output_listings([SRCNO_listings, CNO_listings])
+        output_listings([SRCNO_listings, CNO_listings])
 
 
 # Needs work; not sure it's doing what we originally envisioned
@@ -43,8 +43,8 @@ def generate_listings(card_list, sets_requiring_SRCNO):
         SRCNO_cards = []
         CNO_cards = []
         for card_name in card_list:
-                if card_name.get("rarity") == 'rare' or
-                card_name.get("rarity") == 'mythic':
+                if (card_name.get("rarity") == 'rare' or
+                card_name.get("rarity") == 'mythic'):
                         SRCNO_cards.push(create_SRCNO_entry(card_name))
                 else:
                         current_card_printings = card_name.get('printings')
@@ -59,8 +59,8 @@ def generate_listings(card_list, sets_requiring_SRCNO):
 
 def create_SRCNO_entry(card_object, printing):
         ''' Puts a card object into SRCNO format '''
-        ret_string = f"{printing}, {card_object.get('rarity')},
-        {card_object.get('colors')}, {card_object.get('name')}"
+        ret_string = (f"{printing}, {card_object.get('rarity')}, \
+        {card_object.get('colors')}, {card_object.get('name')}")
         return ret_string
 
 
@@ -84,7 +84,7 @@ def get_card_name_list(card_list_file_path):
 
 def get_all_cards_json(all_cards_file_path):
         ''' Helper function for get_card_objects '''
-	with open(all_cards_file_path)) as read_file:
+	with open(all_cards_file_path, encoding='utf-8') as read_file:
 		return json.load(read_file)
 
 

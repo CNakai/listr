@@ -23,7 +23,7 @@ def get_cmd_args():
 
 
 def get_mtg_sets_json(mtg_sets_file_path):
-	with open(mtg_sets_file_path) as read_file:
+	with open(mtg_sets_file_path, encoding='utf-8') as read_file:
 		return json.load(read_file)
 
 
