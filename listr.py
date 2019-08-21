@@ -56,15 +56,15 @@ def generate_listings(card_list, sets_requiring_SRCNO):
 
 def create_SRCNO_entry(card_object, printing):
     ''' Puts a card object into SRCNO format '''
-    ret_string = (f"{printing}, {card_object.get('rarity')}, \
-    {card_object.get('colors')}, {card_object.get('name')}")
-    return ret_string
+    ret_list = [printing, card_object['rarity'], \
+    card_object['colors'], card_object['name']]
+    return ret_list
 
 
 def create_CNO_entry(card_object):
     ''' Puts a card object into CNO format '''
-    ret_string = (f"{card_object.get('colors')}, {card_object.get('name')}")
-    return ret_string
+    ret_list = [card_object['colors'], card_object['name']]
+    return ret_list
 
 
 # This may be bugged; gonna test it, standalone, in IDLE
