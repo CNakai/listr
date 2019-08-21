@@ -128,10 +128,21 @@ def get_all_sets_after(cutoff_set_code):
         if set_code_release_date_pairs[set_code] > cutoff_date]
 
 
-def output_listings(listings, output_file_path):
+def output_listings(listings, output_file_path, style='python'):
+    if style.lower().strip() == 'html':
+        output_func = output_html_listings
+    else:
+        output_func = output_python_listings
+    return output_func(listings, output_file_path)
+
+
+def output_python_listings(listings, output_file_path):
     with open(output_file_path, 'w') as f:
         f.write('\n'.join([str(listing) for listing in listings]))
 
+
+def output_html_listings(listings, output_file_path):
+    pass
 
 if __name__ == '__main__':
     main()
