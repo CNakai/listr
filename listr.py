@@ -32,8 +32,44 @@ def main():
 	CNO_listings = CNO_sort(listings_for_CNO)
 
 	output_listings([SRCNO_listings, CNO_listings])
- 
-        
+
+
+# Needs work; not sure it's doing what we originally envisioned
+def generate_listings(card_list, sets_requiring_SRCNO):
+        ''' Builds a list of cards grouped based on SRCNO or CNO
+        listing. '''
+        # Currently, this just splits the list of dictionaries into two lists
+        #so we'll have to make some changes to this
+        SRCNO_cards = []
+        CNO_cards = []
+        for card_name in card_list:
+                if card_name.get("rarity") == 'rare' or
+                card_name.get("rarity") == 'mythic':
+                        SRCNO_cards.push(create_SRCNO_entry(card_name))
+                else:
+                        current_card_printings = card_name.get('printings')
+                        for printing in current_card_printings:
+                                if printing in sets_requiring_SRCNO:
+                                        SRCNO_cards.push(create_SRCNO_entry(card_name, printing))
+                                else:
+                                        if card_name not in CNO_cards:
+                                                CNO_cards.push(create_CNO_entry(card_name))
+        return (SRCNO_cards, CNO_cards)
+
+
+def create_SRCNO_entry(card_object, printing):
+        ''' Puts a card object into SRCNO format '''
+        ret_string = f"{printing}, {card_object.get('rarity')},
+        {card_object.get('colors')}, {card_object.get('name')}"
+        return ret_string
+
+
+def create_CNO_entry(card_object):
+        ''' Puts a card object into CNO format '''
+        ret_string = (f"{card_object.get('colors')}, {card_object.get('name')}")
+        return ret_string
+
+
 # This may be bugged; gonna test it, standalone, in IDLE
 def get_card_name_list(card_list_file_path):
         ''' Builds a list of a cards using a user provided file \n
@@ -44,7 +80,7 @@ def get_card_name_list(card_list_file_path):
                 for card in read_file:
                         card_list.push(card.strip())
                 return card_list
-        
+
 
 def get_all_cards_json(all_cards_file_path):
         ''' Helper function for get_card_objects '''
@@ -65,8 +101,8 @@ def get_card_objects(card_list):
                         found_cards.push(card_object)
         print(f"Found {len(found_cards)} / {len(card_list)} cards")
         return found_cards
-                
- 
+
+
 def get_cmd_args():
         ''' Helper function to get CLI arguments '''
 	return (sys.argv[1], sys.argv[2])
