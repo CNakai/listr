@@ -22,16 +22,17 @@ def main():
     (card_list_file_path, formatted_list_output_path) = get_cmd_args()
 
     print(f"Reading Card List from {card_list_file_path} ...")
-    requested_cards = get_card_objects(get_card_name_list())
+    requested_cards = get_card_objects(get_card_name_list(card_list_file_path))
     print(f"Done building card_objects")
 
-    sets_requiring_srcno = get_all_sets_after(CUTOFF_SET_CODE)
+    sets_requiring_SRCNO = get_all_sets_after(CUTOFF_SET_CODE)
     (listings_for_SRCNO, listings_for_CNO) = generate_listings(requested_cards,
                                 sets_requiring_SRCNO)
     SRCNO_listings = SRCNO_sort(listings_for_SRCNO)
     CNO_listings = CNO_sort(listings_for_CNO)
 
-    output_listings([SRCNO_listings, CNO_listings])
+    output_listings(SRCNO_listings + CNO_listings,
+                    formatted_list_output_path)
 
 
 # Needs work; not sure it's doing what we originally envisioned
@@ -47,10 +48,11 @@ def generate_listings(card_list, sets_requiring_SRCNO):
         for printing in current_card_printings:
             if card_name['rarity'] in ('rare', 'mythic') or \
                printing in sets_requiring_SRCNO:
-                SRCNO_cards.push(create_SRCNO_entry(card_name, printing))
+                SRCNO_cards.append(create_SRCNO_entry(card_name, printing))
             else:
-                if card_name not in CNO_cards:
-                    CNO_cards.push(create_CNO_entry(card_name))
+                CNO_listing = create_CNO_entry(card_name)
+                if CNO_listing not in CNO_cards:
+                    CNO_cards.append(CNO_listing)
     return (SRCNO_cards, CNO_cards)
 
 
@@ -84,7 +86,7 @@ def get_card_name_list(card_list_file_path):
     card_list = []
     with open(card_list_file_path) as read_file:
         for card in read_file:
-            card_list.push(card.strip())
+            card_list.append(card.strip())
         return card_list
 
 
@@ -100,11 +102,11 @@ def get_card_objects(card_list):
     found_cards = []
     all_cards_json = get_all_cards_json(ALL_CARDS_FILE_PATH)
     for card_name in card_list:
-        card_object = all_card_json.get(card_name.upper(), "NOT FOUND")
+        card_object = all_cards_json.get(card_name.upper(), "NOT FOUND")
         if card_object == "NOT FOUND":
             print(f"{card_name} not found!")
         else:
-            found_cards.push(card_object)
+            found_cards.append(card_object)
     print(f"Found {len(found_cards)} / {len(card_list)} cards")
     return found_cards
 
@@ -119,18 +121,17 @@ def get_all_sets_after(cutoff_set_code):
     cutoff_set_code : a string representing the 3 character set code as
     defined by WOTC '''
     with open(SET_RELEASE_DATE_FILE_PATH) as SRDF:
-        set_code_release_date_pairs = json.read(SRDF)
+        set_code_release_date_pairs = json.load(SRDF)
     cutoff_date = set_code_release_date_pairs[CUTOFF_SET_CODE]
     return [set_code for set_code
         in set_code_release_date_pairs.keys()
         if set_code_release_date_pairs[set_code] > cutoff_date]
 
 
+def output_listings(listings, output_file_path):
+    with open(output_file_path, 'w') as f:
+        f.write('\n'.join([str(listing) for listing in listings]))
 
 
-# Listings:
-# A listing is the printable version of a card's set, color, rarity, and name
-# data.  One listing is emitted for *all printings* of a card that falls under
-# the simple sorting algorithm.  One listing is emitted *per printing* of a card
-# that falls under the complex sorting algorithm (rares, mythics, and standard
-# sets).
+if __name__ == '__main__':
+    main()

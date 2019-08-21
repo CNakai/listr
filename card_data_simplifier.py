@@ -66,7 +66,7 @@ def flatten_colors(card):
 		colors = 'MC:' + ''.join(colors)
 	elif len(colors) == 1:
 		colors = colors[0]
-	elif card['type'].lower() == 'land':
+	elif card['type'].lower() in ('land', 'gate'):
 		colors = 'L'
 	else:
 		colors = 'C'
