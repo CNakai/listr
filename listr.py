@@ -4,6 +4,8 @@ import sys
 CUTOFF_SET_CODE = 'HOU'
 SET_RELEASE_DATE_FILE_PATH = 'data/set_release_dates.json'
 ALL_CARDS_FILE_PATH = 'data/all_cards.json'
+CONFIG_FILE_PATH = 'data/config.cnf'
+PAGE_SEPARATOR = '------------------------------------------------------------'
 
 
 # SRCNO = set, rarity, color, name order
@@ -25,14 +27,28 @@ def main():
     requested_cards = get_card_objects(get_card_name_list(card_list_file_path))
     print(f"Done building card_objects")
 
-    sets_requiring_SRCNO = get_all_sets_after(CUTOFF_SET_CODE)
+    # Commenting this out for now
+    #sets_requiring_SRCNO = get_all_sets_after(CUTOFF_SET_CODE)
+
+    sets_requiring_SRCNO = get_standard_sets(CONFIG_FILE_PATH)
     (listings_for_SRCNO, listings_for_CNO) = generate_listings(requested_cards,
                                 sets_requiring_SRCNO)
+
     SRCNO_listings = SRCNO_sort(listings_for_SRCNO)
     CNO_listings = CNO_sort(listings_for_CNO)
 
     output_listings(SRCNO_listings + CNO_listings,
                     formatted_list_output_path)
+
+
+def get_standard_sets(config_file):
+    ''' Get the standard sets from the config file '''
+    standard_sets = []
+    with open(config_file, encoding='utf-8') as read_file:
+        config_lines = read_file.readlines()
+        for line in config_lines:
+            standard_sets.append(line.strip())
+    return standard_sets
 
 
 # Needs work; not sure it's doing what we originally envisioned
