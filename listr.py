@@ -67,6 +67,15 @@ def create_CNO_entry(card_object):
     return ret_string
 
 
+def SRCNO_sort(listings):
+    return sorted(sorted(CNO_sort(listings), key=lambda l: l[-3]),
+                  key=lambda l: l[-4])
+
+
+def CNO_sort(listings):
+    return sorted(sorted(listings, key=lambda l: l[-1]), key=lambda l: l[-2])
+
+
 # This may be bugged; gonna test it, standalone, in IDLE
 def get_card_name_list(card_list_file_path):
     ''' Builds a list of a cards using a user provided file \n
