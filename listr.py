@@ -1,5 +1,7 @@
 import json
 import sys
+from mako.template import Template
+from mako.lookup import TemplateLookup
 
 CUTOFF_SET_CODE = 'HOU'
 SET_RELEASE_DATE_FILE_PATH = 'data/set_release_dates.json'
@@ -148,72 +150,12 @@ def output_python_listings(listings, output_file_path):
 
 
 def output_html_listings(listings, output_file_path):
-    prefix = """
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Listr</title>
-    <style>
-      span {
-        display: inline-block;
-      }
-      .set {
-        width: 3em;
-      }
-      .rarity {
-        width: 5.5em;
-      }
-      .color {
-        width: 4em;
-      }
-    </style>
-  </head>
-
-  <body>
-"""
-
-    suffix = """
-    <script type="text/javascript">
-      function setUpListeners() {
-        for (let cb of document.querySelectorAll('input')) {
-          cb.addEventListener('change', checkboxListener)
-        }
-      }
-
-      function checkboxListener() {
-        console.log(this)
-        const card_name = this.parentNode.dataset['name']
-        const set = this.parentNode.dataset['set']
-        const all_occurrences = document.querySelectorAll(`[data-name="${card_name}"]`)
-
-        for (const occurrence of all_occurrences) {
-          if (this.checked && set !== occurrence.dataset['set']) {
-            occurrence.style.display = 'none'
-          } else {
-            occurrence.style.display = 'block'
-          }
-        }
-      }
-
-      setUpListeners()
-    </script>
-  </body>
-</html>
-"""
+    template_lookup = TemplateLookup(directories=['./'])
+    output_template = Template(filename="templates/out_list_template.mako",
+                               lookup=template_lookup)
+    listings_output = output_template.render(listings=listings)
     with open(output_file_path, 'w', encoding='utf-8') as f:
-        f.write(prefix)
-        for listing in listings:
-            f.write(f"""
-    <div data-name="{listing['name']}" data-set="{listing['set']}">""")
-            if listing['sort_type'] == 'SRCNO':
-                f.write(f"""
-      <input type="checkbox"> | <span class="set">{listing['set']}</span> | <span class="rarity">{listing['rarity']}</span> | <span class="color">{listing['color']}</span> | <span class="name">{listing['name']}</span>""")
-            else:
-                f.write(f"""
-      <input type="checkbox"> | <span class="color">{listing['color']}</span> | <span class="name">{listing['name']}</span>""")
-            f.write("""
-    </div>""")
-        f.write(suffix)
+        f.write(listings_output)
 
 if __name__ == '__main__':
     main()
