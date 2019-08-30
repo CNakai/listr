@@ -10,7 +10,7 @@
     <body>
 
     % for listing in listings:
-        <div data-name="${listing['name']}" data-set="${listing['set']}">
+        <div class="${listing['color']}" data-name="${listing['name']}" data-set="${listing['set']}">
       % if listing['sort_type'] == 'SRCNO':
           <input type="checkbox"> | <span class="set">${listing['set']}</span> |
           <span class="rarity">${listing['rarity']}</span> |
