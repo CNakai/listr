@@ -68,8 +68,10 @@ def is_skippable_card(card):
 def create_simplified_card(card, skipped_set_codes):
     return {
         'name': card['name'],
-        'printings': list(filter(lambda p: p not in skipped_set_codes,
-                                 card['printings'])),
+        'printings': list(
+            filter(lambda p: p not in skipped_set_codes and len(p) <= 3,
+                   card['printings'])
+        ),
         'rarity': card['rarity'],
         'colors': flatten_colors(card),
         'cmc': card['convertedManaCost'],
@@ -81,10 +83,10 @@ def create_simplified_card(card, skipped_set_codes):
 def flatten_colors(card):
     colors = card['colors']
     if len(colors) > 1:
-        colors = 'MC:' + ''.join(colors)
+        colors = ''.join(sorted(colors, key=lambda c: 'WUBRG'.find(c)))
     elif len(colors) == 1:
         colors = colors[0]
-    elif set(card['types']).intersection({'Land', 'Gate'}) == set():
+    elif set(card['types']).intersection({'Land', 'Gate'}) != set():
         colors = 'L'
     else:
         colors = 'C'

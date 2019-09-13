@@ -1,0 +1,325 @@
+Act of Treason
+Aerial Assault
+Aether Gust
+Agent of Treachery
+Aggressive Mammoth
+Agonizing Syphon
+Air Elemental
+Ajani, Inspiring Leader
+Ajani, Strength of the Pride
+Ancestral Blade
+Angel of Vitality
+Angelic Gift
+Angelic Guardian
+Anticipate
+Anvilwrought Raptor
+Apostle of Purifying Light
+Atemsis, All-Seeing
+Audacious Thief
+Bag of Holding
+Barkhide Troll
+Barony Vampire
+Bartizan Bats
+Bastion Enforcer
+Battalion Foot Soldier
+Befuddle
+Bishop of Wings
+Bladebrand
+Blightbeetle
+Blood Burglar
+Blood for Bones
+Bloodfell Caves
+Bloodsoaked Altar
+Bloodthirsty Aerialist
+Blossoming Sands
+Bogstomper
+Bone Splinters
+Bone to Ash
+Boneclad Necromancer
+Boreal Elemental
+Brightwood Tracker
+Brineborn Cutthroat
+Bristling Boar
+Brought Back
+Canopy Spider
+Captivating Gyre
+Cavalier of Dawn
+Cavalier of Flame
+Cavalier of Gales
+Cavalier of Night
+Cavalier of Thorns
+Celestial Messenger
+Centaur Courser
+Cerulean Drake
+Chandra's Embercat
+Chandra's Flame Wave
+Chandra's Outrage
+Chandra's Regulator
+Chandra's Spitfire
+Chandra, Acolyte of Flame
+Chandra, Awakened Inferno
+Chandra, Flame's Fury
+Chandra, Novice Pyromancer
+Cloudkin Seer
+Colossus Hammer
+Concordia Pegasus
+Convolute
+Coral Merfolk
+Corpse Knight
+Corpse Knight
+Creeping Trailblazer
+Cryptic Caves
+Daggersail Aeronaut
+Dark Remedy
+Dawning Angel
+Daybreak Chaplain
+Destructive Digger
+Devout Decree
+Diamond Knight
+Disenchant
+Disentomb
+Disfigure
+Dismal Backwater
+Diviner's Lockbox
+Dragon Mage
+Drakuseth, Maw of Flames
+Drawn from Dreams
+Dread Presence
+Dungeon Geists
+Duress
+Elvish Reclaimer
+Ember Hauler
+Embodiment of Agonies
+Empyrean Eagle
+Engulfing Eruption
+Epicure of Blood
+Eternal Isolation
+Ethereal Elk
+Evolving Wilds
+Faerie Miscreant
+Fathom Fleet Cutthroat
+Fearless Halberdier
+Fencing Ace
+Feral Abomination
+Feral Invocation
+Ferocious Pup
+Field of the Dead
+Fire Elemental
+Flame Sweep
+Flood of Tears
+Fortress Crab
+Frilled Sandwalla
+Frilled Sea Serpent
+Frost Lynx
+Fry
+Gargos, Vicious Watcher
+Gauntlets of Light
+Gift of Paradise
+Glaring Aegis
+Glint-Horn Buccaneer
+Gnarlback Rhino
+Goblin Assailant
+Goblin Bird-Grabber
+Goblin Ringleader
+Goblin Smuggler
+Gods Willing
+Goldmane Griffin
+Golos, Tireless Pilgrim
+Gorging Vulture
+Grafdigger's Cage
+Gravedigger
+Gravewaker
+Greenwood Sentinel
+Griffin Protector
+Griffin Sentinel
+Growth Cycle
+Gruesome Scourger
+Haazda Officer
+Hanged Executioner
+Hard Cover
+Healer of the Glade
+Heart-Piercer Bow
+Herald of the Sun
+Hostile Minotaur
+Howling Giant
+Icon of Ancestry
+Immortal Phoenix
+Impassioned Orator
+Imperial Outrider
+Infuriate
+Inspired Charge
+Inspiring Captain
+Ironclad Krovod
+Ironroot Warlord
+Jungle Hollow
+Kaalia, Zenith Seeker
+Keldon Raider
+Kethis, the Hidden Hand
+Knight of the Ebon Legion
+Kykar, Wind's Fury
+Lavakin Brawler
+Leafkin Druid
+Legion's End
+Leyline of Abundance
+Leyline of Anticipation
+Leyline of Combustion
+Leyline of Sanctity
+Leyline of the Void
+Lightning Stormkin
+Loaming Shaman
+Lotus Field
+Loxodon Lifechanter
+Loyal Pegasus
+Mammoth Spider
+Maniacal Rage
+Manifold Key
+Marauder's Axe
+Marauding Raptor
+Mask of Immolation
+Master Splicer
+Masterful Replication
+Meteor Golem
+Metropolis Sprite
+Might of the Masses
+Mind Rot
+Moat Piranhas
+Moldervine Reclamation
+Moment of Heroism
+Moorland Inquisitor
+Mu Yanling, Celestial Wind
+Mu Yanling, Sky Dancer
+Murder
+Mystic Forge
+Natural End
+Negate
+Netcaster Spider
+Nightpack Ambusher
+Nimble Birdsticker
+Noxious Grasp
+Oakenform
+Octoprophet
+Ogre Siegebreaker
+Omnath, Locus of the Roil
+Overcome
+Overgrowth Elemental
+Pacifism
+Pack Mastiff
+Pattern Matcher
+Phantom Warrior
+Planar Cleansing
+Plummet
+Portal of Sanctuary
+Prismite
+Prized Unicorn
+Prowling Caracal
+Pulse of Murasa
+Pyroclastic Elemental
+Rabid Bite
+Raise the Alarm
+Rapacious Dragon
+Reckless Air Strike
+Reduce to Ashes
+Renowned Weaponsmith
+Repeated Reverberation
+Retributive Wand
+Riddlemaster Sphinx
+Rienne, Angel of Rebirth
+Ripscale Predator
+Risen Reef
+Rotting Regisaur
+Rubblebelt Recluse
+Rugged Highlands
+Rule of Law
+Sage's Row Denizen
+Salvager of Ruin
+Sanitarium Skeleton
+Savage Gorger
+Savannah Sage
+Scampering Scorcher
+Scheming Symmetry
+Scholar of the Ages
+Scorch Spitter
+Scoured Barrens
+Scuttlemutt
+Season of Growth
+Sedge Scorpion
+Sephara, Sky's Blade
+Serra's Guardian
+Shared Summons
+Shifting Ceratops
+Shivan Dragon
+Shock
+Show of Valor
+Siege Mastodon
+Silverback Shaman
+Skeleton Archer
+Skyknight Vanguard
+Sleep Paralysis
+Snapping Drake
+Sorcerer of the Fang
+Sorin's Guide
+Sorin's Thirst
+Sorin, Imperious Bloodlord
+Sorin, Vampire Lord
+Soul Salvage
+Soulmender
+Spectral Sailor
+Squad Captain
+Starfield Mystic
+Steadfast Sentry
+Steel Overseer
+Stone Golem
+Swiftwater Cliffs
+Take Vengeance
+Tale's End
+Tectonic Rift
+Temple of Epiphany
+Temple of Malady
+Temple of Mystery
+Temple of Silence
+Temple of Triumph
+Thicket Crasher
+Thirsting Bloodlord
+Thornwood Falls
+Thought Distortion
+Thrashing Brontodon
+Thunderkin Awakener
+Titanic Growth
+Tomebound Lich
+Tranquil Cove
+Trusted Pegasus
+Twinblade Paladin
+Uncaged Fury
+Unchained Berserker
+Undead Servant
+Unholy Indenture
+Unsummon
+Vampire Opportunist
+Vampire of the Dire Moon
+Veil of Summer
+Vengeful Warchief
+Vial of Dragonfire
+Vilis, Broker of Blood
+Vivien's Crocodile
+Vivien, Arkbow Ranger
+Vivien, Nature's Avenger
+Volcanic Dragon
+Voracious Hydra
+Vorstclaw
+Wakeroot Elemental
+Walking Corpse
+Warden of Evos Isle
+Waterkin Shaman
+Wildfire Elemental
+Wind-Scarred Crag
+Winged Words
+Wolfkin Bond
+Wolfrider's Saddle
+Woodland Champion
+Woodland Mystic
+Yanling's Harbinger
+Yarok's Fenlurker
+Yarok's Wavecrasher
+Yarok, the Desecrated
+Yoked Ox
+Zephyr Charge

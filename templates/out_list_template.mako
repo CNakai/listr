@@ -1,30 +1,65 @@
+<%page args="requests"/>
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Listr</title>
-        <style>
-         <%include file="out_list_style.css"/>
-        </style>
-    </head>
 
-    <body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Listr</title>
+    <style>
+     <%include file="out_list_style.css"/>
+    </style>
 
-    % for listing in listings:
-        <div class="${listing['color']}" data-name="${listing['name']}" data-set="${listing['set']}">
-      % if listing['sort_type'] == 'SRCNO':
-          <input type="checkbox"> | <span class="set">${listing['set']}</span> |
-          <span class="rarity">${listing['rarity']}</span> |
-          <span class="color">${listing['color']}</span> |
-          <span class="name">${listing['name']}</span>
-      % else:
-          <input type="checkbox"> |
-          <span class="color">${listing['color']}</span> |
-          <span class="name">${listing['name']}</span>
-      % endif
-        </div>
-    % endfor
+    <%include file="out_list_scripts.mako" args="requests=requests"/>
+  </head>
 
-    <%include file="out_list_scripts.mako"/>
+  <body>
+    <div id="js-button-frame"></div>
+    <div id="pending-requests">
+      <table>
+        <thead><tr>
+          <th>Name:</th> <th>Colors:</th> <th>Rarity:</th> <th>Set:</th>
+          <th>Qty:</th>
+        </tr></thead>
+        <tbody class="js-render-area"
+               data-render-type="srcn"
+               data-columns="name colors rarity printing quantityUnfulfilled"
+               data-sort-order="name colors rarity3 printing"></tbody>
+      </table>
+      <table>
+        <thead><tr>
+          <th>Name:</th> <th>Colors:</th> <th>Rarity:</th> <th>Qty:</th>
+        </tr></thead>
+        <tbody class="js-render-area"
+               data-render-type="cn"
+               data-columns="name colors rarity quantityUnfulfilled"
+               data-sort-order="name colors rarity2"></tbody>
+      </table>
+      <table>
+        <thead><tr>
+          <th>Name:</th> <th>Colors:</th> <th>Rarity:</th> <th>Qty:</th>
+        </tr></thead>
+        <tbody class="js-render-area"
+               data-render-type="compact"
+               data-columns="name colors rarity quantityUnfulfilled"
+               data-sort-order="name colors rarity2"></tbody>
+      </table>
+    </div>
 
-    </body>
+    <div id="processed-requests">
+      <table>
+        <thead><tr><th>Name:</th> <th>Set:</th> <th>Qty:</th></tr></thead>
+        <tbody class="js-render-area"
+               data-render-type="fulfilled"
+               data-columns="name printing quantityFulfilled"
+               data-sort-order="printing name"></tbody>
+      </table>
+      <table>
+        <thead><tr><th>Name:</th> <th>Set:</th></tr></thead>
+        <tbody class="js-render-area"
+               data-render-type="denied"
+               data-columns="name printing"
+               data-sort-order="printing name"></tbody>
+      </table>
+    </div>
+  </body>
 </html>

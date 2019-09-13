@@ -64,7 +64,7 @@ def get_requests(card_requests_file_path):
 
 def parse_request_line(request_line, line_number):
     request_line = request_line.strip()
-    request_line_regexp = r"(^[0-9]{0,2}\s+)?([\w/', \-]+(?!\|))(?:(?:\s+\|)((?: \w{3,4})+)$)?"
+    request_line_regexp = r"^([0-9]{0,2}\s+)?([\w/', \-]+(?!\|))(?:(?:\s+\|)((?: \w{3,4})+)$)?"
 
     result = re.match(request_line_regexp, request_line, flags=re.MULTILINE)
     if not result:
@@ -104,9 +104,11 @@ def enrich_requests(requests):
 
 def lookup_card_data_by_name(card_name, card_data):
     if '//' in card_name:
-        card_name = card_name.split('//')[0].strip()
-    return card_data.get(card_name.upper())
-
+        card = card_data.get(card_name.split('//')[0].strip().upper())
+        card['name'] = card_name.title()
+    else:
+        card = card_data.get(card_name.upper())
+    return card
 
 def enrich_request(request, card_data):
     enriched_request = {**request, **card_data}
@@ -120,13 +122,12 @@ def get_orderings_for_printings(card_data):
     for printing in card_data['printings']:
         if card_data['rarity'] in ('rare', 'mythic') \
            or printing in SETS_REQUIRING_SRCN_ORDER:
-            ordering = 'SRCN_order'
+            ordering = 'srcn'
         else:
-            ordering = 'CN_order'
+            ordering = 'cn'
+        printing_ordering_pairs[printing] = ordering
 
-        printing_ordering_pairs[printing] = 'SRCN_order'
     return printing_ordering_pairs
-
 
 
 def output_enriched_requests(enriched_requests, output_path):
@@ -143,7 +144,7 @@ def output_html(enriched_requests, output_path):
                                lookup=template_lookup)
     output = output_template.render(requests=enriched_requests)
     with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(listings_output)
+        f.write(output)
 
 
 def output_python(enriched_requests, output_path):
